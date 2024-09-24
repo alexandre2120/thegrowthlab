@@ -1,5 +1,3 @@
-import Image from "next/image"
-
 export default function Portfolio() {
   return (
     <section id="portfolio" className="w-full py-12 md:py-24 lg:py-32 text-black bg-gray-100 dark:bg-gray-800">

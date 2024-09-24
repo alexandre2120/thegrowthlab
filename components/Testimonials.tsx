@@ -11,7 +11,7 @@ export default function Testimonials() {
               <CardTitle>João Silva</CardTitle>
             </CardHeader>
             <CardContent>
-              "The Growth Lab transformou completamente nosso site. Agora temos mais clientes do que nunca!"
+              {"The Growth Lab transformou completamente nosso site. Agora temos mais clientes do que nunca!"}
             </CardContent>
           </Card>
           <Card>
@@ -19,16 +19,16 @@ export default function Testimonials() {
               <CardTitle>Maria Santos</CardTitle>
             </CardHeader>
             <CardContent>
-              "Profissionais excepcionais. Entregaram nosso projeto antes do prazo e superaram nossas expectativas."
-            </CardContent>
+{              "Profissionais excepcionais. Entregaram nosso projeto antes do prazo e superaram nossas expectativas."
+}            </CardContent>
           </Card>
           <Card>
             <CardHeader>
               <CardTitle>Carlos Oliveira</CardTitle>
             </CardHeader>
             <CardContent>
-              "O melhor investimento que fizemos para nossa empresa. Recomendo The Growth Lab a todos!"
-            </CardContent>
+{              "O melhor investimento que fizemos para nossa empresa. Recomendo The Growth Lab a todos!"
+}            </CardContent>
           </Card>
         </div>
       </div>

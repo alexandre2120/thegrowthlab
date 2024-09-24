@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button"
-import { MessageCircle } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import WhatsAppIcon from '@/app/public/whatsapp.png'
