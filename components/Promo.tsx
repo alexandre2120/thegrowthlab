@@ -4,27 +4,45 @@ import { useState, useEffect } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Timer, Percent } from 'lucide-react'
+import { Timer } from 'lucide-react'
 import Link from 'next/link'
 
 export default function PromoComponent() {
-    const [timeLeft, setTimeLeft] = useState(5 * 60) // 5 minutes in seconds
+    const initialTime = 5 * 60 // 5 minutes in seconds
+    const [timeLeft, setTimeLeft] = useState<number>(() => {
+        // Recupera o tempo salvo no localStorage ou inicia com o tempo inicial
+        const savedTime = localStorage.getItem('promoTimeLeft')
+        return savedTime ? parseInt(savedTime) : initialTime
+    })
 
     useEffect(() => {
-        if (timeLeft <= 0) return
+        // Salva o tempo restante no localStorage
+        localStorage.setItem('promoTimeLeft', timeLeft.toString())
 
+        // Se o tempo acabou, remove a chave do localStorage
+        if (timeLeft <= 0) {
+            localStorage.removeItem('promoTimeLeft')
+            return
+        }
+
+        // Configura o timer para diminuir o tempo a cada segundo
         const timer = setInterval(() => {
             setTimeLeft(prevTime => prevTime - 1)
         }, 1000)
 
+        // Limpa o timer ao desmontar o componente
         return () => clearInterval(timer)
     }, [timeLeft])
 
+    // Função para formatar o tempo em minutos e segundos
     const formatTime = (seconds: number) => {
         const minutes = Math.floor(seconds / 60)
         const remainingSeconds = seconds % 60
         return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`
     }
+
+    // Se o tempo acabou, não renderiza a seção
+    if (timeLeft <= 0) return null
 
     return (
         <section id="contact" className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
@@ -34,7 +52,6 @@ export default function PromoComponent() {
                 </CardHeader>
                 <CardContent className="p-6 space-y-4">
                     <div className="flex items-center justify-center space-x-2">
-
                         <span className="text-4xl font-bold text-primary">30% OFF</span>
                     </div>
                     <div className="text-center">
@@ -47,11 +64,13 @@ export default function PromoComponent() {
                     </div>
                 </CardContent>
                 <CardFooter>
-                    <Link href="https://api.whatsapp.com/send/?phone=351935602668&text=Ol%C3%A1%21+Gostaria+de+saber+mais+sobre+seus+servi%C3%A7os.&type=phone_number&app_absent=0">
-                        <Button className="w-full text-lg" size="lg">
-                            Entrar em Contato
-                        </Button>
-                    </Link>
+                    <div className='w-full'>
+                        <Link href="https://api.whatsapp.com/send/?phone=351935602668&text=Ol%C3%A1%21+Gostaria+de+saber+mais+sobre+seus+servi%C3%A7os.+EMPRESA30&type=phone_number&app_absent=0">
+                            <Button className="w-full text-lg" size="lg">
+                                Entrar em Contato
+                            </Button>
+                        </Link>
+                    </div>
                 </CardFooter>
             </Card>
         </section>
