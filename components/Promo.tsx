@@ -9,21 +9,26 @@ import Link from 'next/link'
 
 export default function PromoComponent() {
     const initialTime = 5 * 60 // 5 minutes in seconds
-    const [timeLeft, setTimeLeft] = useState<number>(() => {
-        // Recupera o tempo salvo no localStorage ou inicia com o tempo inicial
-        const savedTime = localStorage.getItem('promoTimeLeft')
-        return savedTime ? parseInt(savedTime) : initialTime
-    })
+    const [timeLeft, setTimeLeft] = useState<number>(initialTime)
+    const [isClient, setIsClient] = useState<boolean>(false)
 
     useEffect(() => {
+        // Confirma que estamos no cliente (navegador)
+        setIsClient(true)
+        
+        if (typeof window !== 'undefined') {
+            const savedTime = localStorage.getItem('promoTimeLeft')
+            if (savedTime) {
+                setTimeLeft(parseInt(savedTime))
+            }
+        }
+    }, [])
+
+    useEffect(() => {
+        if (!isClient || timeLeft <= 0) return
+
         // Salva o tempo restante no localStorage
         localStorage.setItem('promoTimeLeft', timeLeft.toString())
-
-        // Se o tempo acabou, remove a chave do localStorage
-        if (timeLeft <= 0) {
-            localStorage.removeItem('promoTimeLeft')
-            return
-        }
 
         // Configura o timer para diminuir o tempo a cada segundo
         const timer = setInterval(() => {
@@ -32,7 +37,7 @@ export default function PromoComponent() {
 
         // Limpa o timer ao desmontar o componente
         return () => clearInterval(timer)
-    }, [timeLeft])
+    }, [timeLeft, isClient])
 
     // Função para formatar o tempo em minutos e segundos
     const formatTime = (seconds: number) => {
@@ -65,7 +70,7 @@ export default function PromoComponent() {
                 </CardContent>
                 <CardFooter>
                     <div className='w-full'>
-                        <Link href="https://api.whatsapp.com/send/?phone=351935602668&text=Ol%C3%A1%21+Gostaria+de+saber+mais+sobre+seus+servi%C3%A7os.+EMPRESA30&type=phone_number&app_absent=0">
+                        <Link href="https://api.whatsapp.com/send/?phone=351935602668&text=Ol%C3%A1%21+Gostaria+de+saber+mais+sobre+seus+servi%C3%A7os.&type=phone_number&app_absent=0">
                             <Button className="w-full text-lg" size="lg">
                                 Entrar em Contato
                             </Button>
