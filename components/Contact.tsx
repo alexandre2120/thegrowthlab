@@ -10,6 +10,7 @@ export default function Contact() {
         <form className="max-w-md mx-auto space-y-4">
           <Input placeholder="Seu Nome" />
           <Input type="email" placeholder="Seu Email" />
+          <Textarea placeholder="Nome da sua empresa" />
           <Textarea placeholder="Sua Mensagem" />
           <Button type="submit" className="w-full">Enviar Mensagem</Button>
         </form>
