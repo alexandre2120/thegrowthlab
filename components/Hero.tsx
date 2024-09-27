@@ -19,7 +19,7 @@ export default function Hero() {
           <Image src={MacImage} width={500} height={500} alt="Macbook"/>
           <div className="space-x-4">
             <Button asChild>
-              <Link href="#contact">Comece Agora</Link>
+              <Link href="https://api.whatsapp.com/send/?phone=351935602668&text=Ol%C3%A1%21+Gostaria+de+saber+mais+sobre+seus+servi%C3%A7os.&type=phone_number&app_absent=0">Comece Agora</Link>
             </Button>
             <Button variant="outline" asChild>
               <Link href="#services">Saiba Mais</Link>

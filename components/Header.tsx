@@ -28,7 +28,7 @@ export default function Header() {
           </nav>
           <div className="flex items-center">
             <Button asChild>
-              <Link href="#contact">Contate-nos</Link>
+              <Link href="https://api.whatsapp.com/send/?phone=351935602668&text=Ol%C3%A1%21+Gostaria+de+saber+mais+sobre+seus+servi%C3%A7os.&type=phone_number&app_absent=0">Contate-nos</Link>
             </Button>
           </div>
         </div>

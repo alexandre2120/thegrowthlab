@@ -4,6 +4,7 @@ import Process from '@/components/Process'
 import Portfolio from '@/components/Portfolio'
 import Testimonials from '@/components/Testimonials'
 import Contact from '@/components/Contact'
+import PromoComponent from '@/components/Promo'
 
 export default function Home() {
   return (
@@ -13,7 +14,8 @@ export default function Home() {
       <Process />
       <Portfolio />
       <Testimonials />
-      <Contact />
+      <PromoComponent/>
+      {/* <Contact /> */}
     </div>
   )
 }
